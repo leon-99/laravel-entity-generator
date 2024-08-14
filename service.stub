@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\{{ClassName}}\{{ClassName}}Repository;
+
+class {{ClassName}}
+{
+     protected ${{ClassName}}Repository;
+
+    public function __construct({{ClassName}}Repository ${{ClassName}}Repository)
+    {
+        $this->{{ClassName}}Repository = ${{ClassName}}Repository;
+    }
+
+    public function getAll()
+    {
+        return  $this->{{ClassName}}Repository->getAll();
+    }
+
+    public function get($id)
+    {
+        return $this->{{ClassName}}Repository->findById($id);
+    }
+
+    public function create($data)
+    {
+        return $this->{{ClassName}}Repository->create($data);
+    }
+
+    public function update($data)
+    {
+        $item = $this->{{ClassName}}Repository->findById($data["id"]);
+
+        if (!$item) {
+            throw new \Exception("{{ClassName}} not found");
+        }
+
+        return $this->{{ClassName}}Repository->update($item, $data);
+    }
+
+    public function delete($id)
+    {
+        $item = $this->{{ClassName}}Repository->findById($id);
+        if(!$item) {
+            throw new \Exception("{{ClassName}} not found");
+        }
+
+        $this->{{ClassName}}Repository->delete($item);
+    }
+}

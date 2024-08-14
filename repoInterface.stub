@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Repositories\{{ClassName}};
+
+interface {{ClassName}}RepositoryInterface {
+
+    public function findById($id);
+    public function search($column, $value);
+    public function getAll();
+    public function create($data);
+    public function update($item, $data);
+    public function delete($item);
+}

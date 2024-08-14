@@ -1,0 +1,59 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Models\{{ model }};
+use Illuminate\Http\Request;
+use App\Http\Requests\{{ model }}Request;
+
+class {{ class }} extends Controller
+{
+    protected $model;
+
+    protected $test;
+
+    public function __construct({{ model }} $model)
+    {
+        $this->model = $model;
+    }
+
+    public function index()
+    {
+        return sendResponse($this->model->all(), '{{model}} retrieved');
+    }
+
+    public function store({{ model }}Request $request)
+    {
+        $data = $this->model->create($request->all());
+        return sendResponse($data, '{{ model }} created');
+    }
+
+    public function show(Request $request)
+    {
+        $data = $this->model->find($request->id);
+        if(!$data) return sendError('{{ model }} not found', 404);
+
+        return sendResponse($data, 'retrieved');
+    }
+
+    public function update({{ model }}Request $request)
+    {
+        $data = $this->model->find($request->id);
+        if(!$data) return sendError('{{ model }} not found', 404);
+
+        $data->update($request->all());
+
+        return sendResponse($data, '{{ model }} updated');
+    }
+
+    public function destroy(Request $request)
+    {
+        $data = $this->model->find($request->id);
+        if(!$data) return sendError('{{ model }} not found', 404);
+
+        $data->delete();
+
+        return sendResponse(null, '{{ model }} deleted');
+    }
+}
