@@ -112,6 +112,14 @@ class MakeEntity extends Command
         ]);
     }
 
+    /**
+     * Generate file from stub
+     *
+     * @param string $stubName
+     * @param atring $outputPath
+     * @param array $replacements array of keys that will be replace with the values.
+     * @return void
+     */
     private function generateFileFromStub($stubName, $outputPath, $replacements)
     {
         $stubPath = base_path("stubs/{$stubName}");
