@@ -1,51 +1,51 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\{{ClassName}};
 
-use App\Repositories\{{ClassName}}\{{ClassName}}Repository;
+use App\Models\{{ClassName}};
 
-class {{ClassName}}
+class {{ClassName}}Service
 {
-     protected ${{ClassName}}Repository;
+     protected $model;
 
-    public function __construct({{ClassName}}Repository ${{ClassName}}Repository)
+    public function __construct({{ClassName}} ${{ClassName}})
     {
-        $this->{{ClassName}}Repository = ${{ClassName}}Repository;
+        $this->model = ${{ClassName}};
     }
 
-    public function getAll()
+   public function getAll()
     {
-        return  $this->{{ClassName}}Repository->getAll();
+        return  $this->model->all();;
     }
 
     public function get($id)
     {
-        return $this->{{ClassName}}Repository->findById($id);
+        return $this->model->find($id);
     }
 
     public function create($data)
     {
-        return $this->{{ClassName}}Repository->create($data);
+        return $this->model->create($data);
     }
 
     public function update($data)
     {
-        $item = $this->{{ClassName}}Repository->findById($data["id"]);
+        $item = $this->model->find($data["id"]);
 
         if (!$item) {
-            throw new \Exception("{{ClassName}} not found");
+            throw new \Exception("Task not found");
         }
 
-        return $this->{{ClassName}}Repository->update($item, $data);
+        return $this->model->update($item, $data);
     }
 
     public function delete($id)
     {
-        $item = $this->{{ClassName}}Repository->findById($id);
+        $item = $this->model->find($id);
         if(!$item) {
-            throw new \Exception("{{ClassName}} not found");
+            throw new \Exception("Task not found");
         }
 
-        $this->{{ClassName}}Repository->delete($item);
+        $this->model->delete($item);
     }
 }

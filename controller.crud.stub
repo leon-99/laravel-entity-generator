@@ -2,58 +2,89 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Http\Controllers\Controller;
-use App\Models\{{ model }};
 use Illuminate\Http\Request;
 use App\Http\Requests\{{ model }}Request;
+use App\Services\{{ model }}\{{ model }}Service;
 
 class {{ class }} extends Controller
 {
-    protected $model;
+    protected ${{ model }}Service;
 
     protected $test;
 
-    public function __construct({{ model }} $model)
+    public function __construct({{ model }}Service ${{ model }}Service)
     {
-        $this->model = $model;
+        $this->{{ model }}Service = ${{ model }}Service;
     }
 
     public function index()
     {
-        return sendResponse($this->model->all(), '{{model}} retrieved');
+        return $this->sendResponse($this->{{ model }}Service->getAll(), 200, '{{ model }} retrieved');
     }
 
     public function store({{ model }}Request $request)
     {
-        $data = $this->model->create($request->all());
-        return sendResponse($data, '{{ model }} created');
+        $data = $this->{{ model }}Service->create($request->all());
+        return $this->sendResponse($data, 201, '{{ model }} created');
     }
 
     public function show(Request $request)
     {
-        $data = $this->model->find($request->id);
+        $data = $this->{{ model }}Service->get($request->id);
         if(!$data) return sendError('{{ model }} not found', 404);
 
-        return sendResponse($data, 'retrieved');
+        return $this->sendResponse($data, 200, 'retrieved');
     }
 
     public function update({{ model }}Request $request)
     {
-        $data = $this->model->find($request->id);
-        if(!$data) return sendError('{{ model }} not found', 404);
+       DB::beginTransactions();
+       try {
+         $data = $this->{{ model }}Service->update($request->all());
+         DB::commit();
 
-        $data->update($request->all());
-
-        return sendResponse($data, '{{ model }} updated');
+         return $this->sendResponse($data, 200, '{{ model }} updated');
+       } catch(\Throwable $th) {
+            DB::rollback();
+       }
     }
 
     public function destroy(Request $request)
     {
-        $data = $this->model->find($request->id);
-        if(!$data) return sendError('{{ model }} not found', 404);
 
-        $data->delete();
+       DB::beginTransactions();
+       try {
+            $this->{{ model }}Service->delete($request->id);
+            DB::commit();
 
-        return sendResponse(null, '{{ model }} deleted');
+            return $this->sendResponse(null, 200, '{{ model }} deleted');
+       } catch(\Throwable $th) {
+            DB::rollback();
+       }
+
+
+
+
+    }
+
+     public function sendResponse($data, $status, $message)
+    {
+        $response = [
+            'success' => true,
+            'data'    => $data,
+            'message' => $message,
+        ];
+
+        return response()->json($response, $status);
+    }
+
+    function sendError($message, $code = 403)
+    {
+        $response = [
+            'success' => false,
+            'message' => $message,
+        ];
+
+        return response()->json($response, $code);
     }
 }
