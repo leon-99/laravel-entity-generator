@@ -27,5 +27,5 @@ After running this command, a new folder named stubs will appear in your project
     To generate the necessary files for an entity, use the following command:
 > php artisan make:entity {Name}
 
-    {Name} could be an entity such as Car, Shop, User, etc.
+    {Name} could be an entity such as Car, Shop, User, etc. 
     
