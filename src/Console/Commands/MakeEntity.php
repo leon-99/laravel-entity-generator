@@ -113,8 +113,7 @@ class MakeEntity extends Command
         $tableName = Str::plural(strtolower($givenName));
 
         $this->call('make:migration', [
-            'name' => "create_{$tableName}_table",
-            '--force' => $this->option('force')
+            'name' => "create_{$tableName}_table"
         ]);
     }
 
