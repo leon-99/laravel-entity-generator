@@ -3,14 +3,13 @@
 namespace {{ namespace }};
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\{{ model }}Request;
 use App\Services\{{ model }}\{{ model }}Service;
 
 class {{ class }} extends Controller
 {
     protected ${{ model }}Service;
-
-    protected $test;
 
     public function __construct({{ model }}Service ${{ model }}Service)
     {
@@ -31,14 +30,14 @@ class {{ class }} extends Controller
     public function show(Request $request)
     {
         $data = $this->{{ model }}Service->get($request->id);
-        if(!$data) return sendError('{{ model }} not found', 404);
+        if(!$data) return $this->sendError('{{ model }} not found', 404);
 
         return $this->sendResponse($data, 200, 'retrieved');
     }
 
     public function update({{ model }}Request $request)
     {
-       DB::beginTransactions();
+       DB::beginTransaction();
        try {
          $data = $this->{{ model }}Service->update($request->all());
          DB::commit();
@@ -46,13 +45,13 @@ class {{ class }} extends Controller
          return $this->sendResponse($data, 200, '{{ model }} updated');
        } catch(\Throwable $th) {
             DB::rollback();
+            return $this->sendError('Error updating {{ model }}: ' . $th->getMessage(), 500);
        }
     }
 
     public function destroy(Request $request)
     {
-
-       DB::beginTransactions();
+       DB::beginTransaction();
        try {
             $this->{{ model }}Service->delete($request->id);
             DB::commit();
@@ -60,11 +59,8 @@ class {{ class }} extends Controller
             return $this->sendResponse(null, 200, '{{ model }} deleted');
        } catch(\Throwable $th) {
             DB::rollback();
+            return $this->sendError('Error deleting {{ model }}: ' . $th->getMessage(), 500);
        }
-
-
-
-
     }
 
      public function sendResponse($data, $status, $message)
