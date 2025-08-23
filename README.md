@@ -23,7 +23,7 @@ composer require win-aung/laravel-entity-generator
 
 1. Clone this repository to your Laravel project:
 ```bash
-git clone https://github.com/your-username/laravel-entity-generator.git
+git clone https://github.com/leon-99/laravel-entity-generator.git
 ```
 
 2. Add the package to your `composer.json`:
@@ -256,7 +256,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Credits
 
-- [Win Aung](https://github.com/your-username)
+- [Win Aung](https://github.com/leon-99)
 - All Contributors
 
 ---
