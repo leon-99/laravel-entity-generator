@@ -31,7 +31,7 @@ This guide will help you install and set up the Laravel Entity Generator package
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/laravel-entity-generator.git
+   git clone https://github.com/leon-99/laravel-entity-generator.git
    ```
 
 2. **Add to composer.json:**
@@ -151,7 +151,7 @@ For development or local testing:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/laravel-entity-generator.git
+   git clone https://github.com/leon-99/laravel-entity-generator.git
    cd laravel-entity-generator
    ```
 
@@ -174,7 +174,7 @@ For development or local testing:
 
 ## Support
 
-- **GitHub Issues:** [Create an issue](https://github.com/your-username/laravel-entity-generator/issues)
+- **GitHub Issues:** [Create an issue](https://github.com/leon-99/laravel-entity-generator/issues)
 - **Documentation:** [README.md](README.md)
 - **Examples:** Check the [examples](examples/) directory
 
