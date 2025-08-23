@@ -1,0 +1,61 @@
+{
+    "name": "win-aung/laravel-entity-generator",
+    "description": "A Laravel package to generate CRUD entities with controllers, models, services, requests, resources, and migrations using service design pattern",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Win Aung",
+            "email": "your-email@example.com",
+            "homepage": "https://github.com/your-username"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "crud",
+        "generator",
+        "entity",
+        "service",
+        "model",
+        "controller",
+        "migration"
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.0|^10.0|^11.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0|^8.0|^9.0",
+        "phpunit/phpunit": "^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WinAung\\LaravelEntityGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WinAung\\LaravelEntityGenerator\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WinAung\\LaravelEntityGenerator\\LaravelEntityGeneratorServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/your-username/laravel-entity-generator/issues",
+        "source": "https://github.com/your-username/laravel-entity-generator"
+    }
+}

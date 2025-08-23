@@ -33,19 +33,20 @@ class {{ClassName}}Service
         $item = $this->model->find($data["id"]);
 
         if (!$item) {
-            throw new \Exception("Task not found");
+            throw new \Exception("{{ClassName}} not found");
         }
 
-        return $this->model->update($item, $data);
+        $item->update($data);
+        return $item->fresh();
     }
 
     public function delete($id)
     {
         $item = $this->model->find($id);
         if(!$item) {
-            throw new \Exception("Task not found");
+            throw new \Exception("{{ClassName}} not found");
         }
 
-        $this->model->delete($item);
+        return $item->delete();
     }
 }
