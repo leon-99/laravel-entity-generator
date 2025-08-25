@@ -16,33 +16,7 @@ A powerful Laravel package that generates complete CRUD entities with controller
 ### Via Composer
 
 ```bash
-composer require win-aung/laravel-entity-generator
-```
-
-### Manual Installation
-
-1. Clone this repository to your Laravel project:
-```bash
-git clone https://github.com/leon-99/laravel-entity-generator.git
-```
-
-2. Add the package to your `composer.json`:
-```json
-{
-    "require": {
-        "win-aung/laravel-entity-generator": "*"
-    }
-}
-```
-
-3. Run composer update:
-```bash
-composer update
-```
-
-4. Publish the configuration (optional):
-```bash
-php artisan vendor:publish --tag=config
+composer require win-aung/laravel-entity-generator:dev-main
 ```
 
 ## Usage
